@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DonateController;
 use App\Http\Controllers\ListDonatorController;
+use App\Http\Controllers\TrackingDonateController;
 
 Route::get('/', function () {
     return view('frontend.index');
@@ -18,9 +19,8 @@ Route::get('/success', function () {
 //     return view('donate');
 // });
 
-Route::get('/managedonate', function () {
-    return view('backend.donate.donate');
-});
+Route::get('/managedonate', [TrackingDonateController::class, 'index']);
+Route::get('/tracking/{id}', [TrackingDonateController::class, 'tracking']);
 
 Route::get('/acceptdonate', function () {
     return view('backend.donate.acceptdonate');
@@ -31,10 +31,6 @@ Route::get('/profileaccept', function () {
 // Route::get('/donates', function () {
 //     return view('backend.donate');
 // });
-
-Route::get('/tracking', function () {
-    return view('backend.donate.tracking');
-});
 
 Route::middleware('guest')->group(function(){
 

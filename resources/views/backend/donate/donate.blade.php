@@ -17,13 +17,13 @@
             <!-- Total Donasi Uang -->
             <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                 <h2 class="text-2xl font-semibold text-green-700 mb-2">Total Donasi Uang</h2>
-                <p class="text-4xl font-bold">Rp 10.000.000</p>
+                <p class="text-4xl font-bold">Rp {{ number_format($totalCashDonate, 0, ',', '.') }}</p>
                 <p class="text-gray-600 mt-2">Diterima dari 50 donatur</p>
             </div>
             <!-- Total Donasi Makanan -->
             <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <h2 class="text-2xl font-semibold text-green-700 mb-2">Total Donasi Makanan</h2>
-                <p class="text-4xl font-bold">200 Paket</p>
+                <h2 class="text-2xl font-semibold text-green-700 mb-2">Total Donasi Barang</h2>
+                <p class="text-4xl font-bold">{{ $totalItemDonate }} Paket</p>
                 <p class="text-gray-600 mt-2">Diterima dari 30 donatur</p>
             </div>
         </div>
@@ -54,51 +54,32 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse($donates as $no => $donation)
                 <tr class="hover:bg-gray-100">
-                    <td class="py-2 px-4 border">1</td>
-                    <td class="py-2 px-4 border">Makanan</td>
-                    <td class="py-2 px-4 border">100 Paket</td>
+                    <?php 
+                        $jmlhDonasi = $donation->donation_type == "uang" 
+                            ? "RP. " . number_format($donation->amount, 0, ',', '.') 
+                            : number_format($donation->item_qty, 0, ',', '.') . " Paket";
+                    ?>
+                    <td class="py-2 px-4 border">{{ $no + 1 }}</td>
+                    <td class="py-2 px-4 border">{{ $donation->donation_type }}</td>
+                    <td class="py-2 px-4 border">{{ $jmlhDonasi }}</td>
                     <td class="py-2 px-4 border">Penerima A</td>
-                    <td class="py-2 px-4 border">12 Oktober 2024</td>
+                    <td class="py-2 px-4 border">{{ $donation->expired_date ?? '-'}}</td>
                     <td class="py-2 px-4 border">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs">Disalurkan</span>
+                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs">Proses</span>
                     </td>
                     <td class="py-2 px-4 border text-center">
-                        <a href="/track/1" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+                        <a href="/tracking/{{$donation->id}}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
                            Lacak
                         </a>
-                    </td> <!-- Tambahkan tombol lacak -->
+                    </td> 
                 </tr>
-                <tr class="hover:bg-gray-100">
-                    <td class="py-2 px-4 border">2</td>
-                    <td class="py-2 px-4 border">Uang</td>
-                    <td class="py-2 px-4 border">Rp 5.000.000</td>
-                    <td class="py-2 px-4 border">Penerima B</td>
-                    <td class="py-2 px-4 border">10 Oktober 2024</td>
-                    <td class="py-2 px-4 border">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs">Disalurkan</span>
-                    </td>
-                    <td class="py-2 px-4 border text-center">
-                        <a href="/track/2" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                           Lacak
-                        </a>
-                    </td> <!-- Tambahkan tombol lacak -->
+                @empty
+                <tr>
+                    <td colspan="8" class="py-2 px-4 border text-center">Tidak ada donasi tersedia.</td>
                 </tr>
-                <tr class="hover:bg-gray-100">
-                    <td class="py-2 px-4 border">3</td>
-                    <td class="py-2 px-4 border">Makanan</td>
-                    <td class="py-2 px-4 border">50 Paket</td>
-                    <td class="py-2 px-4 border">Penerima C</td>
-                    <td class="py-2 px-4 border">9 Oktober 2024</td>
-                    <td class="py-2 px-4 border">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs">Disalurkan</span>
-                    </td>
-                    <td class="py-2 px-4 border text-center">
-                        <a href="/track/3" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                           Lacak
-                        </a>
-                    </td> <!-- Tambahkan tombol lacak -->
-                </tr>
+                @endforelse
                 <!-- Tambahkan baris donasi lain di sini -->
             </tbody>
         </table>

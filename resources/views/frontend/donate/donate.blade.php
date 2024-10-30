@@ -60,6 +60,34 @@
                 </div>
 
                 <div class="mb-6">
+                    <label for="courier_id" class="block text-lg font-semibold mb-2">Kurir</label>
+                    <select id="courier_id" name="courier_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                        <option value="">Pilih jenis kurir</option>
+                        <option value="jne">JNE Express</option>
+                        <option value="pos">Pos Indonesia</option>
+                        <option value="jnt">J&T Express</option>
+                        <option value="jnt_cargo">J&T Cargo</option>
+                        <option value="sicepat">SiCepat</option>
+                        <option value="tiki">TIKI</option>
+                        <option value="anteraja">AnterAja</option>
+                        <option value="wahana">Wahana</option>
+                        <option value="ninja">Nija Express</option>
+                        <option value="lion">Lion Parcel</option>
+                        <option value="pcp">PCP Express</option>
+                        <option value="jet">JET Express</option>
+                        <option value="spx">Shopee Express</option>
+                        <option value="sap">SAP Express</option>
+                        <option value="kurir_tokopedia">Kurir Rekomendasi</option>
+                        <option value="lex">Lazada Express</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label for="awb" class="block text-lg font-semibold mb-2">Nomor Resi</label>
+                    <input id="awb" name="awb" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"></input>
+                </div>
+
+                <div class="mb-6">
                     <label for="message" class="block text-lg font-semibold mb-2">Pesan (Opsional)</label>
                     <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
                 </div>

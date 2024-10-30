@@ -38,6 +38,8 @@ class DonateController extends Controller
             'item_qty' => 'nullable',
             'expired_date' => 'nullable',
             'message' => 'nullable',
+            'awb' => 'required',
+            'courier_id' => 'required',
         ]);
         Donate::create($validateData);
         return redirect(route('donate.index'))->with('success','Anda telah melakukan donasi!');
